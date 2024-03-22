@@ -2,61 +2,61 @@
 
 class Staff extends WebUser
 {
-    protected static function respondInquiry(array $data){
+    public static function respondInquiry(array $data){
 
     }
    
-    protected static function viewOrders(array $data){
+    public static function viewOrders(array $data){
 
     }
     
    
-    protected static function createSurvey(array $data){
+    public static function createSurvey(array $data){
 
     }
     
-    protected static function updateSurvey(array $data){
+    public static function updateSurvey(array $data){
 
     }
     
-    protected static function createSurveys(array $data){
+    public static function createSurveys(array $data){
 
     }
     
-    protected static function deleteSurveys(array $data){
+    public static function deleteSurveys(array $data){
 
     }
     
     
-    protected static function ViewresponseToSurvey(array $data){
+    public static function ViewresponseToSurvey(array $data){
         
     }
 
-    protected static function updateProducts(array $data){
+    public static function updateProducts(array $data){
         
     }
 
-    protected static function deleteProducts(array $data){
+    public static function deleteProducts(array $data){
         
     }
-    protected static function viewGuides(array $data){
+    public static function viewGuides(array $data){
  
     }
-    protected static function makeGuides(array $data){
+    public static function makeGuides(array $data){
  
     }
-    protected static function updateGuides(array $data){
+    public static function updateGuides(array $data){
  
     }
-    protected static function deleteguides(array $data){
+    public static function deleteguides(array $data){
  
     }
 
    
-    protected static function getNotifications(array $data){
+    public static function getNotifications(array $data){
         
     }
-    protected static function getReport(array $data){
+    public static function getReport(array $data){
 
     }
 }

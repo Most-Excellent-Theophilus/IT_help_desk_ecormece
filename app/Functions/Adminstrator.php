@@ -3,23 +3,23 @@
 class Adminstrator extends Staff
 {
 
-    private static function createProduct(array $data){
+    public static function createProduct(array $data){
 
     }
-    private static function deleteProduct(array $data){
+    public static function deleteProduct(array $data){
 
     }
 
-    private static function viewStaff(array $data){
+    public static function viewStaff(array $data){
 
     }
-    private static function createStaff(array $data){
+    public static function createStaff(array $data){
 
     }
-    private static function udpdateStaff(array $data){
+    public static function udpdateStaff(array $data){
         
     }
-    private static function deleteStaff(array $data){
+    public static function deleteStaff(array $data){
         
     }
 }
