@@ -13,5 +13,26 @@ class Functions
     public static function saveFile($dir,$file){
         
     }
+
+    public static function getLinks($directory){
+        $files = scandir($directory);
+        $links =[];
+        if ($files !== false) {
+            foreach ($files as $file) {
+                // Check if the item is a file
+                if (is_file($directory . '/' . $file)) {
+                    $link = Functions::split($file,'_');
+                    $links[]= $link[0] ;
+                }
+            }
+        }
+        $linksHomeRemove = array_diff($links,array('home'));
+        $linksAddHome = array_merge(array('home'),$linksHomeRemove );
+        return  $linksAddHome;
+    }
+    public static function ucfirst_array($value) {
+        return ucfirst($value);
+    }
+    
    
 }

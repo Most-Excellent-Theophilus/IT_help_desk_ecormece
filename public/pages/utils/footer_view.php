@@ -1,8 +1,5 @@
-<?php
-echo
-  <<< HTML
   <!-- ======= Footer ======= -->
-  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="margin-top:40px">
 
     <div class="footer-top">
       <div class="container">
@@ -11,11 +8,12 @@ echo
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <?php
+              foreach ($this->links as $key => $value) {
+                $className = ($this->url_path[1] == $value) ? 'active' : '';
+                echo '<li><i class="bx bx-chevron-right"></i><a class="' . $className . '" href="?user=' . $this->url_path[0] . '&path=' . $value . '">' . ucfirst($value) . '</a></li>';
+              }
+              ?>
             </ul>
           </div>
 
@@ -61,11 +59,8 @@ echo
       <div class="copyright">
         &copy; Copyright <strong><span>ICT solutions Plus</span></strong>. All Rights Reserved
       </div>
-     
+
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
-HTML;

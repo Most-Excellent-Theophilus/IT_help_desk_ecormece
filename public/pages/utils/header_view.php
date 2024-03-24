@@ -1,35 +1,31 @@
 
 <body>
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center" style="background-color:  rgba(3, 6, 6, 0.8) ;">
-    <div class="container d-flex justify-content-between align-items-center">
+  <header data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="?user=<?php echo $this->url_path[0]?>&path=home">ICT solutions Plus</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <?php
+            foreach ($links as $key => $value) {
+          $className = ($this->url_path[1] == $value) ? 'active' : '' ;
 
-      <div class="logo">
-        <h1 class="text-light"><a class="<?php $retVal = ($page === 'home') ? 'active' : 'none'; echo $retVal ?>" href="?page=home<?php echo $dataFromUrl; ?>"><span>ICT solutions Plus</span></a></h1>
-      </div>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="<?php $retVal = ($page === 'home') ? 'active' : 'none'; echo $retVal ?>" href="?page=home<?php echo $dataFromUrl; ?>">Home</a></li>
-          <li><a class="<?php $retVal = ($page === 'about') ? 'active' : 'none'; echo $retVal ?>" href="?page=about<?php echo $dataFromUrl; ?>">About</a></li>
-          <li><a class="<?php $retVal = ($page === 'services') ? 'active' : 'none'; echo $retVal ?>" href="?page=services<?php echo $dataFromUrl; ?>">Services</a></li>
-          <li><a class="<?php $retVal = ($page === 'team') ? 'active' : 'none'; echo $retVal ?>" href="?page=team<?php echo $dataFromUrl; ?>">Team</a></li>
-          <li><a class="<?php $retVal = ($page === 'contact') ? 'active' : 'none'; echo $retVal ?>" href="?page=contact<?php echo $dataFromUrl; ?>">Contact Us</a></li>
-          <?php
-          if (isset($_GET['username'])) {
-            echo <<< HTML
-                            <li><a class="active logMeIn" href="?page=dashboard{$dataFromUrl}">{$_GET['username']}</a></li>
-                        HTML;
-          } else {
-            echo <<< HTML
-                          <li><a class="logMeIn" href="?page=login">LOGIN</a></li>
-                      HTML;
-          }
-
+              echo '<li class="nav-item"><a class="nav-link  '.$className .'" href="?user='.$this->url_path[0].'&path='.$value.'" aria-current="page" >'.ucfirst($value).'</a></li>';
+            }
           ?>
+          
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-  </header><!-- End Header -->
+  </nav>
+</header>
+<!-- End Header -->
+ 
