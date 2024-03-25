@@ -1,2 +1,2 @@
-<h1>Page not Found</h1>
+<h1>Not Authorized!!</h1>
 <a href="?user=geust&path=home">Go to Home</a>

@@ -42,8 +42,9 @@ class Notifications
         $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new Notifications_model ;
+        $model->find($data);
     }
 }

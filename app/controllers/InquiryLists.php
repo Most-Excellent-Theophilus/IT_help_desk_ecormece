@@ -42,8 +42,10 @@ class InquiryLists
         $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new InquiryLists_model ;
+        $model->find($data);
+
     } 
 }

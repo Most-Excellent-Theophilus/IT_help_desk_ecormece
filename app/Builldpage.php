@@ -8,10 +8,13 @@ class Builldpage
     private $ext = '_view.php';
     private $guestdir = 'guest/';
     private $url_path;
+    private $alertClass;
+
     private $links;
 
 
     public function __construct($url_path)
+
     {
         $this->url_path = $url_path;
         require $this->dir . $this->pagedir . $this->utilsdir . 'head' . $this->ext;
@@ -21,6 +24,8 @@ class Builldpage
         $this->makeHeader();
         $this->makeMainContent();
         $this->makeFooter();
+        $this->makeAlert();
+
     }
 
     private  function makeHeader()
@@ -29,53 +34,91 @@ class Builldpage
         switch ($this->url_path[0]) {
             case 'guest':
                 if ($this->url_path[1] !== 'loggin' && $this->url_path[1] !== 'createAccount') {
-                    // Functions::show($this->url_path[1]);
                     $links = Functions::getLinks("public/pages");
-                    $links[] = 'loggin'; 
-                    $this->links=$links;
-                    require $this->dir . $this->pagedir . $this->utilsdir . 'header' . $this->ext;
+                    $links[] = 'loggin';
+                    $this->links = $links;
+                    $page = 'header';
                 }
 
                 break;
 
             case 'customer':
-                # code...
+                if (isset($_SESSION['auth'])) {
+                    $links = Functions::getLinks("public/pages/customer");
+
+                    $this->links = $links;
+                    $page = 'header';
+                } else {
+                    $page = 'notauthorized';
+                }
+
+
                 break;
 
             case 'staff':
-                # code...
+                $page = 'header';
                 break;
 
             case 'admin':
-                # code...
+                $page = 'header';
+
                 break;
 
             default:
-                # code...
+                $page = 'notfound';
                 break;
         }
+        require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
+
     }
-    private function makeMainContent(){
-        
+    private function makeAlert()
+    {
+        # code...
+        if (isset($_SESSION['data']['status'])) {
+            switch ($_SESSION['data']['status']) {
+                case 'success':
+                    $this->alertClass = 'alert-success';
+                    break;
+
+                case 'fail':
+                    $this->alertClass = 'alert-danger';
+                    break;
+
+                case 'error':
+                    $this->alertClass = 'alert-warning';
+                    break;
+
+                default:
+                    break;
+            }
+            require 'public/pages/utils/alert_view.php';
+        }
+    }
+    private function makeMainContent()
+    {
+
         switch ($this->url_path[0]) {
             case 'guest':
-                
+
                 $getpage = $this->dir . $this->pagedir . $this->url_path[1] . $this->ext;
                 if (file_exists($getpage)) {
                     require $getpage;
                 } elseif (file_exists($this->dir . $this->pagedir . $this->guestdir . $this->url_path[1] . $this->ext)) {
                     require $this->dir . $this->pagedir . $this->guestdir . $this->url_path[1] . $this->ext;
-                } 
-               
-                else{
+                } else {
                     require $this->dir . $this->pagedir . $this->utilsdir . 'notfound' . $this->ext;
                 }
-                
-
                 break;
 
             case 'customer':
-                # code...
+                if (isset($_SESSION['auth'])) {
+                    
+                    
+                } else {
+                    $page = 'notauthorized';
+                }
+
+
                 break;
 
             case 'staff':
@@ -94,9 +137,12 @@ class Builldpage
 
     private  function makeFooter()
     {
-        if ($this->url_path[1] !== 'loggin' && $this->url_path[1] !== 'createAccount') {
-            require $this->dir . $this->pagedir . $this->utilsdir . 'footer' . $this->ext;
-        } 
+        if (!isset($_SESSION['auth'])) {
+            if ($this->url_path[1] !== 'loggin' && $this->url_path[1] !== 'createAccount') {
+                require $this->dir . $this->pagedir . $this->utilsdir . 'footer' . $this->ext;
+            }
+        }
+       
         require 'public/pages/utils/foot_view.php';
     }
 }

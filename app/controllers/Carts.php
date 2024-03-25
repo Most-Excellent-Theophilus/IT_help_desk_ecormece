@@ -41,8 +41,9 @@ class Carts
         $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new Carts_model;
+        $model->find($data);
     }   
 }

@@ -42,8 +42,9 @@ class Products
         $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new Products_model;
+        $model->find($data);
     } 
 }

@@ -6,7 +6,7 @@ class surveyResponses
     public static function index()
     {
         $model = new SurveyResponses_model;
-        $model->getAll();
+        return $model->getAll();
 
     }
 
@@ -14,7 +14,7 @@ class surveyResponses
     public static function store($data)
     {
         $model = new SurveyResponses_model;
-        $model->create($data);
+        return $model->create($data);
 
     }
 
@@ -22,7 +22,7 @@ class surveyResponses
     public static function show($id)
     {
         $model = new SurveyResponses_model;
-        $model->read($id);
+        return $model->read($id);
 
 
     }
@@ -31,7 +31,7 @@ class surveyResponses
     public static function update($id,$data)
     {
         $model = new SurveyResponses_model;
-        $model->update($id,$data);
+        return $model->update($id,$data);
 
     }
 
@@ -39,11 +39,13 @@ class surveyResponses
     public static function destroy($id)
     {
         $model = new SurveyResponses_model;
-        $model->delete($id);
+        return $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new SurveyResponses_model;
+        return $model->find($data);
+
     }
 }

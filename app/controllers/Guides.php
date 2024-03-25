@@ -42,8 +42,9 @@ class Guides
         $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new Guides_model ;
+        $model->find($data);
     }  
 }

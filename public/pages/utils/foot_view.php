@@ -1,7 +1,7 @@
 <?php
 
 echo <<<HTML
-
+  
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>

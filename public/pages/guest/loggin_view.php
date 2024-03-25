@@ -1,14 +1,14 @@
 <main class="form-signin w-100 m-auto container">
-  <form action="Actions.php" method="post">
+  <form action="Actions.php?a=POST&source=Users&method=search&do=loggin" method="post">
     <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Loggin</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
+      <input type="text" name='username' class="form-control" id="floatingInput" placeholder="Username" name="username" required>
       <label for="floatingInput">User name</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+      <input type="password" name='password' class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
       <label for="floatingPassword">Password</label>
     </div>
 
@@ -20,6 +20,9 @@
 
       </label>
       <a href="?user=guest&path=createAccount">create One</a>
+      <hr>
+      <a href="?user=guest&path=home">Home</a>
+
     </div>
   </form>
 </main>

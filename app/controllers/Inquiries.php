@@ -6,7 +6,7 @@ class Inquiries
     public static function index()
     {
         $model = new Inquiries_model ;
-        $model->getAll();
+        return $model->getAll();
 
     }
 
@@ -14,7 +14,7 @@ class Inquiries
     public static function store($data)
     {
         $model = new Inquiries_model ;
-        $model->create($data);
+        return $model->create($data);
 
     }
 
@@ -22,7 +22,7 @@ class Inquiries
     public static function show($id)
     {
         $model = new Inquiries_model ;
-        $model->read($id);
+        return $model->read($id);
 
 
     }
@@ -31,7 +31,7 @@ class Inquiries
     public static function update($id,$data)
     {
         $model = new Inquiries_model ;
-        $model->update($id,$data);
+        return $model->update($id,$data);
 
     }
 
@@ -42,8 +42,9 @@ class Inquiries
         $model->delete($id);
 
     }
-    public static function search()
+    public static function search($data)
     {
         $model = new Inquiries_model ;
+        return $model->find($data);
     }  
 }
