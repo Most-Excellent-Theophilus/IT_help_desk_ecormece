@@ -30,6 +30,8 @@ echo <<<HTML
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/css.css" rel="stylesheet">
 
+<script>
 
+</script>
 </head>
 HTML;

@@ -51,12 +51,11 @@ if (!empty($_GET['a'])) {
 
 
                             $class = $_GET['source'];
-                            $id = [$_GET['id']];
+                            $id = $_GET['id'];
                             $data =  $class::destroy($id);
                      } else {
                             $data = ['message' => 'Parameters not enough'];
                      }
-                     $data = ['message' => 'this is the delete method'];
                      break;
 
               default:
@@ -72,27 +71,39 @@ $dir = '';
 
 switch ($_GET['do']) {
        case 'create Account':
-              $dir = 'user=guest&path=loggin' ;
+              if (isset($_SESSION['auth'])) {
+                     # code...
+                     $dir = 'user=' . $_SESSION['auth']['type'] . '&path=users';
+              } else{
+                     $dir = 'user=guest&path=loggin';
+
+              }
               break;
        case 'loggin':
 
               if ($data['status'] == 'success') {
-                     $dir = 'user=' . $data['data']['type'] . '&path=loggin' ;
-                     $_SESSION['auth']=$data['data'];
+                     $dir = 'user=' . $data['data']['type'] . '&path=loggin';
+                     $_SESSION['auth'] = $data['data'];
               } else {
-                     $dir = 'user=guest&path=loggin' ;
+                     $dir = 'user=guest&path=loggin';
               }
               break;
+       case 'Delete Account':
+              $dir = 'user=' . $_SESSION['auth']['type'] . '&path=users';
+              break;
+
 
        default:
               # code...
               break;
-         
 }
 
-$_SESSION['hap'] = $_GET['do'];
-$_SESSION['data'] = $data;
+
+       $_SESSION['hap'] = $_GET['do'];
+       $_SESSION['data'] = $data;
 
 
-header("Location: index.php? " . $dir);
-exit;
+       header("Location: index.php? " . $dir);
+       exit;
+
+

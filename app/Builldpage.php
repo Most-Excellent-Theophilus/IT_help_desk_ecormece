@@ -8,8 +8,8 @@ class Builldpage
     private $ext = '_view.php';
     private $guestdir = 'guest/';
     private $custdir = 'customer/';
-    private $staffdir= 'staff/'; 
-    private $admindir= 'admin/'; 
+    private $staffdir = 'staff/';
+    private $admindir = 'admin/';
     private $staffext = '_staff';
     private $url_path;
     private $custext = '_customer';
@@ -38,10 +38,11 @@ class Builldpage
             case 'guest':
                 if ($this->url_path[1] !== 'loggin' && $this->url_path[1] !== 'createAccount') {
                     $links = Functions::getLinks("public/pages");
-        
+
                     $links[] = 'loggin';
                     $this->links = $links;
                     $page = 'header';
+                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
                 }
 
                 break;
@@ -53,10 +54,9 @@ class Builldpage
 
                     $this->links = $links;
                     $page = 'header';
-                } else {
-                    $page = 'notauthorized';
-                }
+                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
 
+                }
 
                 break;
 
@@ -67,23 +67,19 @@ class Builldpage
 
                     $this->links = $links;
                     $page = 'header';
-                } else {
-                    $page = 'notauthorized';
+                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
                 }
-
                 break;
 
             case 'admin':
                 if (isset($_SESSION['auth'])) {
-                    $links= array_merge(Functions::getLinks("public/pages/staff/admin"),array_diff(Functions::getLinks("public/pages/staff"),array('home'))  );
+                    $links = array_merge(Functions::getLinks("public/pages/staff/admin"), array_diff(Functions::getLinks("public/pages/staff"), array('home')));
                     $links[] = $_SESSION['auth']['username'];
 
                     $this->links = $links;
                     $page = 'header';
-                } else {
-                    $page = 'notauthorized';
+                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
                 }
-
 
                 break;
 
@@ -91,7 +87,6 @@ class Builldpage
                 $page = 'notfound';
                 break;
         }
-        require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
     }
     private function makeAlert()
     {
@@ -152,15 +147,13 @@ class Builldpage
                 break;
 
             case 'admin':
-                if (isset($_SESSION['auth']) && file_exists($this->dir . $this->pagedir .$this->staffdir. $this->admindir . $this->url_path[1] . $this->ext)) {
+                if (isset($_SESSION['auth'])  && file_exists($this->dir . $this->pagedir . $this->staffdir . $this->admindir . $this->url_path[1] . $this->ext)) {
 
-                    require $this->dir . $this->pagedir.$this->staffdir . $this->admindir . $this->url_path[1] . $this->ext;
-                } 
-                elseif (file_exists($this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext)) {
+                    require $this->dir . $this->pagedir . $this->staffdir . $this->admindir . $this->url_path[1] . $this->ext;
+                } elseif (file_exists($this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext)) {
 
                     require $this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext;
-                }
-                else {
+                } else {
                     require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
                 }
                 break;
