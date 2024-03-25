@@ -33,6 +33,8 @@ class Functions
     public static function ucfirst_array($value) {
         return ucfirst($value);
     }
-    
+    public static function h1me($data) {
+        echo '<h1>'.$data.'</h1>';
+    }
    
 }
