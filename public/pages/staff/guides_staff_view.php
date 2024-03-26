@@ -1,4 +1,4 @@
-<h1 class="container p-5">Guides</h1>
+<h1 class="container p-5" style="outline: 1px dotted;">Guides</h1>
 
 <style>
     /* Style for the dialog */
@@ -21,7 +21,7 @@
 </style>
 <div class="card container">
     <div class="card-header d-flex justify-content-between">
-        <h3 class="card-title">Guides List</h3>
+        <h3 class="card-title outlined  "  >Guides List</h3>
         <div class="card-tools align-middle">
             <button type="button" class="btn btn-primary" id="openDialogButton">Add New</button>
         </div>

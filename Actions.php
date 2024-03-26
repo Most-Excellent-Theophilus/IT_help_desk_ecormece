@@ -106,4 +106,3 @@ switch ($_GET['do']) {
 
        header("Location: index.php? " . $dir);
        exit;
-

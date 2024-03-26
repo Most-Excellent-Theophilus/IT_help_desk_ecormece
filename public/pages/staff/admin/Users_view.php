@@ -1,4 +1,4 @@
-<h1 class="container p-5">Users</h1>
+<h1 class="container p-5 " style="outline: 1px dotted;">Users</h1>
 
 <style>
     /* Style for the dialog */
