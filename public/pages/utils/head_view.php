@@ -8,7 +8,7 @@ echo <<<HTML
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>ICT solutions Plus</title>
+  <title>{$_GET['path']} / {$_GET['user']} / ICT solutions</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,6 +29,11 @@ echo <<<HTML
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/css.css" rel="stylesheet">
+
+  <!-- summernotes -->
+  <script src="assets/js/jquery-3.4.1.slim.min.js" ></script>
+    <link href="summernote/summernote-lite.min.css" rel="stylesheet">
+    <script src="summernote/summernote-lite.min.js"></script>
 
 <script>
 

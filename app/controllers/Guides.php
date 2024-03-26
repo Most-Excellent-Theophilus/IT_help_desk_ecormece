@@ -6,7 +6,7 @@ class Guides
     public static function index()
     {
         $model = new Guides_model ;
-        $model->getAll();
+        return $model->getAll();
 
     }
 
@@ -14,7 +14,7 @@ class Guides
     public static function store($data)
     {
         $model = new Guides_model ;
-        $model->create($data);
+        return $model->create($data);
 
     }
 
@@ -22,7 +22,7 @@ class Guides
     public static function show($id)
     {
         $model = new Guides_model ;
-        $model->read($id);
+        return $model->read($id);
 
 
     }
@@ -31,7 +31,7 @@ class Guides
     public static function update($id,$data)
     {
         $model = new Guides_model ;
-        $model->update($id,$data);
+        return $model->update($id,$data);
 
     }
 
@@ -39,12 +39,12 @@ class Guides
     public static function destroy($id)
     {
         $model = new Guides_model ;
-        $model->delete($id);
+        return $model->delete($id);
 
     }
     public static function search($data)
     {
         $model = new Guides_model ;
-        $model->find($data);
+        return $model->find($data);
     }  
 }

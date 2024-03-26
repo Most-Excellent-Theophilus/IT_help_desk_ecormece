@@ -5,7 +5,7 @@ class Carts
     public static function index()
     {
         $model = new Carts_model;
-        $model->getAll();
+        return $model->getAll();
 
     }
 
@@ -13,7 +13,7 @@ class Carts
     public static function store($data)
     {
         $model = new Carts_model;
-        $model->create($data);
+        return $model->create($data);
 
     }
 
@@ -21,7 +21,7 @@ class Carts
     public static function show($id)
     {
         $model = new Carts_model;
-        $model->read($id);
+        return $model->read($id);
 
 
     }
@@ -30,7 +30,7 @@ class Carts
     public static function update($id,$data)
     {
         $model = new Carts_model;
-        $model->update($id,$data);
+        return $model->update($id,$data);
 
     }
 
@@ -38,12 +38,12 @@ class Carts
     public static function destroy($id)
     {
         $model = new Carts_model;
-        $model->delete($id);
+        return $model->delete($id);
 
     }
     public static function search($data)
     {
         $model = new Carts_model;
-        $model->find($data);
+        return $model->find($data);
     }   
 }

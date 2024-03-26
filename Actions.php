@@ -3,8 +3,7 @@
 require 'app/forActions.php';
 session_start();
 
-Functions::show($_GET);
-Functions::show($_POST);
+
 // check for values in the get variable
 if (!empty($_GET['a'])) {
        switch ($_GET['a']) {
@@ -94,13 +93,15 @@ switch ($_GET['do']) {
 
 
        default:
-              # code...
+       $dir = 'user=' . $_SESSION['auth']['type'] . '&path='.$_GET['from'];
+              
               break;
 }
 
 
        $_SESSION['hap'] = $_GET['do'];
        $_SESSION['data'] = $data;
+       Functions::show($_SESSION);
 
 
        header("Location: index.php? " . $dir);

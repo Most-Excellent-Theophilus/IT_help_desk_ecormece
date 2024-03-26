@@ -49,36 +49,40 @@ class Builldpage
 
             case 'customer':
                 if (isset($_SESSION['auth'])) {
-                    $links = Functions::getLinks("public/pages/customer");
-                    $links[] = $_SESSION['auth']['username'];
-
-                    $this->links = $links;
-                    $page = 'header';
-                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
-
+                    if ($_SESSION['auth']['type']=='customer') {
+                        $links = Functions::getLinks("public/pages/customer");
+                        $links[] = $_SESSION['auth']['username'];
+                        $this->links = $links;
+                        $page = 'header';
+                        require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
+                    }
+                    
                 }
 
                 break;
 
             case 'staff':
                 if (isset($_SESSION['auth'])) {
-                    $links = Functions::getLinks("public/pages/staff");
-                    $links[] = $_SESSION['auth']['username'];
-
-                    $this->links = $links;
-                    $page = 'header';
-                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
+                    if ($_SESSION['auth']['type'] == 'staff' || $_SESSION['auth']['admin']) {
+                        $links = Functions::getLinks("public/pages/staff");
+                        $links[] = $_SESSION['auth']['username'];
+                        $this->links = $links;
+                        $page = 'header';
+                        require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
+                    }
                 }
                 break;
 
             case 'admin':
                 if (isset($_SESSION['auth'])) {
-                    $links = array_merge(Functions::getLinks("public/pages/staff/admin"), array_diff(Functions::getLinks("public/pages/staff"), array('home')));
-                    $links[] = $_SESSION['auth']['username'];
+                    if ($_SESSION['auth']['type'] == 'admin') {
+                        $links = array_merge(Functions::getLinks("public/pages/staff/admin"), array_diff(Functions::getLinks("public/pages/staff"), array('home')));
+                        $links[] = $_SESSION['auth']['username'];
 
-                    $this->links = $links;
-                    $page = 'header';
-                    require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
+                        $this->links = $links;
+                        $page = 'header';
+                        require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;
+                    }
                 }
 
                 break;
@@ -128,34 +132,51 @@ class Builldpage
                 break;
 
             case 'customer':
-                if (isset($_SESSION['auth']) && file_exists($this->dir . $this->pagedir . $this->custdir . $this->url_path[1] . $this->custext . $this->ext)) {
+                if (isset($_SESSION['auth'])) {
+                    if ($_SESSION['auth']['type'] == 'customer' && file_exists($this->dir . $this->pagedir . $this->custdir . $this->url_path[1] . $this->custext . $this->ext)) {
 
-                    require $this->dir . $this->pagedir . $this->custdir . $this->url_path[1] . $this->custext . $this->ext;
+                        require $this->dir . $this->pagedir . $this->custdir . $this->url_path[1] . $this->custext . $this->ext;
+                    } else {
+                        require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
+                    }
                 } else {
-                    require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
+                    require $this->dir . $this->pagedir . $this->utilsdir . 'notauthorized' . $this->ext;
                 }
+
 
                 break;
 
             case 'staff':
-                if (isset($_SESSION['auth']) && file_exists($this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext)) {
+                if (isset($_SESSION['auth'])) {
+                    if ($_SESSION['auth']['type'] == 'admin' ||  $_SESSION['auth']['type'] == 'staff' && file_exists($this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext)) {
 
-                    require $this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext;
+                        require $this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext;
+                    } else {
+                        require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
+                    }
                 } else {
-                    require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
+                    require $this->dir . $this->pagedir . $this->utilsdir . 'notauthorized' . $this->ext;
                 }
+
+
                 break;
 
             case 'admin':
-                if (isset($_SESSION['auth'])  && file_exists($this->dir . $this->pagedir . $this->staffdir . $this->admindir . $this->url_path[1] . $this->ext)) {
+                if (isset($_SESSION['auth'])) {
+                    if ($_SESSION['auth']['type'] == 'admin' && file_exists($this->dir . $this->pagedir . $this->staffdir . $this->admindir . $this->url_path[1] . $this->ext)) {
 
-                    require $this->dir . $this->pagedir . $this->staffdir . $this->admindir . $this->url_path[1] . $this->ext;
-                } elseif (file_exists($this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext)) {
+                        require $this->dir . $this->pagedir . $this->staffdir . $this->admindir . $this->url_path[1] . $this->ext;
+                    } elseif (file_exists($this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext)) {
 
-                    require $this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext;
+                        require $this->dir . $this->pagedir . $this->staffdir . $this->url_path[1] . $this->staffext . $this->ext;
+                    } else {
+                        require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
+                    }
                 } else {
-                    require $this->dir . $this->pagedir . $this->utilsdir . 'account' . $this->ext;
+                    require $this->dir . $this->pagedir . $this->utilsdir . 'notauthorized' . $this->ext;
                 }
+
+
                 break;
 
             default:
