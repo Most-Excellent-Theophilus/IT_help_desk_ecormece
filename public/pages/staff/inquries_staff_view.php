@@ -13,11 +13,17 @@
         border-bottom: 1px dotted ;
        
     }
+    dialog {
+        max-width: 700px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 </style>
 <div class="container p-2" style="outline: 1px solid;">
     <div>
         <div style="display: flex;">
-            <h2 style="flex-grow: 2; border-bottom:1px solid;">Create Category</h2> <button class="btn btn-primary">Create</button>
+            <h2 style="flex-grow: 2; border-bottom:1px solid;">Create Category</h2> <button id="openDialogButton" class="btn btn-primary">Create</button>
 
         </div>
     
@@ -58,3 +64,59 @@
     </div>
 
 </div>
+
+
+
+<!-- The dialog content -->
+<dialog id="myDialog">
+
+
+    <div class="container">
+        <h2>Create a Category</h2>
+        <form action="Actions.php?a=POST&source=InquiryLists&method=store&do=create Inquiry Cartegory&from=<?php echo $_GET['path']; ?>" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="username">Enter name:</label>
+                <input type="text" name='ename' class="form-control" placeholder="Inq name" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="username">Description:</label>
+                <input type="text" name='desc' class="form-control" placeholder="Inq description" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="username">Price:</label>
+                <input type="number" name='price' class="form-control" placeholder="Inq description" required>
+            </div>
+            <input type="hidden" name='by' value="<?php echo $_SESSION['auth']['id']; ?>">
+
+            <br>
+            <div class="form-group">
+                <label for="username">Price:</label>
+                <input type="text" class="form-control" value="<?php echo$_SESSION['auth']['username'] ; ?>" disabled>
+            </div>
+            <br>
+            <button id="closeDialogButton" class="btn btn-danger">Close</button>
+            <button type="submit" class="btn btn-primary">Create </button>
+        </form>
+    </div>
+</dialog>
+
+<script>
+    // Get references to the dialog and its controls
+    const dialog = document.getElementById('myDialog');
+    const openDialogButton = document.getElementById('openDialogButton');
+    const closeDialogButton = document.getElementById('closeDialogButton');
+
+    // Show the dialog when the open dialog button is clicked
+    openDialogButton.addEventListener('click', () => {
+        dialog.showModal();
+    });
+
+    // Close the dialog when the close button is clicked
+    closeDialogButton.addEventListener('click', () => {
+        dialog.close();
+    });
+</script>
+
+

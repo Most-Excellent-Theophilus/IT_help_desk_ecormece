@@ -35,6 +35,8 @@ echo <<<HTML
     <link href="summernote/summernote-lite.min.css" rel="stylesheet">
     <script src="summernote/summernote-lite.min.js"></script>
 
+    
+
 <script>
 
 </script>
