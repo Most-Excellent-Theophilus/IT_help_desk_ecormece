@@ -26,7 +26,7 @@ if (!empty($_GET['a'])) {
 
                             $data = call_user_func_array([$class, $method], $parameters);
                      } else {
-                            $data =    ['message' => 'POST Parameters not enough'];
+                            $data =    ['status' => 'fail','message' => 'POST Parameters not enough'];
                      }
 
 
@@ -34,14 +34,15 @@ if (!empty($_GET['a'])) {
 
               case 'PUT':
 
-                     if (!empty($_GET['method'] && !empty($_GET['id']))) {
+                     if (!empty($_GET['source'] && !empty($_GET['id']))) {
 
 
                             $class = $_GET['source'];
                             $id = [$_GET['id']];
                             $data =   $class::update($id, [$_POST]);
                      } else {
-                            $data =   ['message' => 'Parameters not enough'];
+                               $data = ['status' => 'fail', 'message' => 'Parameters not enough'];
+
                      }
                      break;
 
@@ -53,17 +54,17 @@ if (!empty($_GET['a'])) {
                             $id = $_GET['id'];
                             $data =  $class::destroy($id);
                      } else {
-                            $data = ['message' => 'Parameters not enough'];
+                            $data = ['status' => 'fail','message' => 'Parameters not enough'];
                      }
                      break;
 
               default:
                      http_response_code(405); // Method Not Allowed
-                     $data =     ['message' => 'Method Not Allowed'];
+                     $data =     ['status' => 'fail','message' => 'Method Not Allowed'];
                      break;
        }
 } else {
-       $data =   ['message' => 'Parameters are not enough, please lod the url'];
+       $data =   ['status' => 'fail','message' => 'Parameters are not enough, please lod the url'];
 }
 
 $dir = '';
@@ -101,8 +102,9 @@ switch ($_GET['do']) {
 
        $_SESSION['hap'] = $_GET['do'];
        $_SESSION['data'] = $data;
-       Functions::show($_SESSION);
 
+       $d =['target'=>$_SESSION['auth']['id'],'nature'=>$data['status'],'message'=>$_GET['do']];
+      $n= Notifications::store($d);
 
        header("Location: index.php? " . $dir);
        exit;

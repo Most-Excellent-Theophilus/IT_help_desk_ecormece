@@ -135,6 +135,7 @@ abstract class Database
            return ['status' => 'error', 'message' => 'Query failed: ' . $e->getMessage()];
         }
     }
+    
     public  function getAll()
     {
         $sql = "SELECT * FROM {$this->getTableName()}";
@@ -151,4 +152,21 @@ abstract class Database
            return ['status' => 'error', 'message' => 'Query failed: ' . $e->getMessage()] ;
         }
     }
+    public function countAll()
+{
+    $sql = "SELECT COUNT(*) as count FROM {$this->getTableName()}";
+
+    try {
+        $stmt = $this->pdo->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return ['status' => 'success', 'count' => $result['count']];
+        } else {
+            return ['status' => 'fail', 'message' => 'Unable to count rows'];
+        }
+    } catch (PDOException $e) {
+        return ['status' => 'error', 'message' => 'Query failed: ' . $e->getMessage()];
+    }
+}
+
 }

@@ -9,7 +9,12 @@ class surveyResponses
         return $model->getAll();
 
     }
+    public static function count()
+    {
+        $model = new SurveyResponses_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

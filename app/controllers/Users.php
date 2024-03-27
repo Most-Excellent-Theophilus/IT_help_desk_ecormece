@@ -8,7 +8,12 @@ class Users
         $model = new Users_model;
         return   $model->getAll();
     }
+    public static function count()
+    {
+        $model = new Users_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

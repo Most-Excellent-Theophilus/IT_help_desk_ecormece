@@ -9,6 +9,12 @@ class Carts
 
     }
 
+    public static function count()
+    {
+        $model = new Carts_model;
+        return $model->countAll();
+
+    }
 
     public static function store($data)
     {

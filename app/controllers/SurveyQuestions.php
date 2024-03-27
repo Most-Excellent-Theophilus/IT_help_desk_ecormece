@@ -10,7 +10,12 @@ class SurveyQuestions
 
     }
 
+    public static function count()
+    {
+        $model = new SurveyQuestions_model;
+        return $model->countAll();
 
+    }
     public static function store($data)
     {
         $model = new SurveyQuestions_model ;

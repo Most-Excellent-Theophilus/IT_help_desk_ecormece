@@ -10,7 +10,12 @@ class SoldProducts
 
     }
 
+  public static function count()
+    {
+        $model = new SoldProducts_model;
+        return $model->countAll();
 
+    }
     public static function store($data)
     {
         $model = new SoldProducts_model ;

@@ -9,7 +9,12 @@ class Orders
         return $model->getAll();
 
     }
+    public static function count()
+    {
+        $model = new Orders_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

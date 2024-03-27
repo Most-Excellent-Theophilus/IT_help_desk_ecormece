@@ -9,7 +9,12 @@ class Guides
         return $model->getAll();
 
     }
+    public static function count()
+    {
+        $model = new Guides_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

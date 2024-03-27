@@ -8,7 +8,12 @@ class Products
         $model = new Products_model;
         return $model->getAll();
     }
+    public static function count()
+    {
+        $model = new Products_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

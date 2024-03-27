@@ -9,7 +9,12 @@ class InquiryLists
         return $model->getAll();
 
     }
+    public static function count()
+    {
+        $model = new InquiryLists_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

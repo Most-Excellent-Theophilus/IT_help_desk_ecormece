@@ -9,7 +9,12 @@ class Notifications
         return $model->getAll();
 
     }
+    public static function count()
+    {
+        $model = new Notifications_model;
+        return $model->countAll();
 
+    }
 
     public static function store($data)
     {

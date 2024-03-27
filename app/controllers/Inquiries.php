@@ -10,7 +10,12 @@ class Inquiries
 
     }
 
+    public static function count()
+    {
+        $model = new Inquiries_model;
+        return $model->countAll();
 
+    }
     public static function store($data)
     {
         $model = new Inquiries_model ;
