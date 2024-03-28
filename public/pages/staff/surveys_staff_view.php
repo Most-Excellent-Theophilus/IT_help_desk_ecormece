@@ -14,10 +14,12 @@
        
     }
     dialog {
-        max-width: 700px;
+        
+        width: 100%;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        
     }
 </style>
 <div class="container p-2" style="outline: 1px solid;">
@@ -31,7 +33,7 @@
 
     <div>
 
-        <div style="display: flex;">
+        <div style="display: flex; flex-direction: column   ;">
             <h2 style="flex-grow: 2; border-bottom:1px solid;">Customer Response </h2>
         </div>
         <p>1</p>
@@ -43,13 +45,19 @@
 
 <!-- The dialog content -->
 <dialog id="myDialog">
+<h1>Create Survey</h1>
 
+        <form action="" method="post" enctype="multipart/form-data" style=" display:grid; grid-template-columns: 1fr 2fr;">
+        <div style="display: flex;flex-direction: column   ; padding:10px;">
+            <a class="btn btn-secondary">Question</a><br>
+            <a class="btn btn-secondary">Response Option</a><br><hr>
+        <a class="btn btn-primary">Continue</a>
 
-    <div class="container">
-        <form action="Actions.php?a=POST&source=SurveryQuestions&method=store&do=create Survey&from=<?php echo $_GET['path']; ?>" method="post" enctype="multipart/form-data">
+        </div>
+           <textarea name="form" id="" cols="30" rows="10"  ></textarea>
            
         </form>
-    </div>
+        <button id="closeDialogButton" class="btn btn-danger"> Close</button>
 </dialog>
 
 <script>

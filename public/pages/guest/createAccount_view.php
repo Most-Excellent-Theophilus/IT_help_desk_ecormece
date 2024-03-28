@@ -5,6 +5,7 @@
     <div class="container">
       <div class="row gx-lg-5 align-items-center">
         <div class="col-lg-6 mb-5 mb-lg-0">
+          <img  src="assets/img/ictSolution.png" width="200" alt="">
           <h1 class="my-5 display-3 fw-bold ls-tight">
             The best offer <br />
             <span class="text-primary">for your business</span>

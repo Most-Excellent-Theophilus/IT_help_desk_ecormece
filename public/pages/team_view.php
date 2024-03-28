@@ -7,63 +7,41 @@
     Someone famous in <cite title="Source Title">Source Title</cite>
   </figcaption>
   <style>
-    .col{
+    .col {
       padding: 20px;
     }
   </style>
-<!--  -->
-<div class="container text-center">
-  <div class="row">
-  <div class="col">
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-    </div><div class="col">
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-    </div><div class="col">
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-    </div><div class="col">
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-    </div>
+  <!--  -->
+  <div class="container text-center">
+    <div class="row">
+    <?php $u =Users::index(); 
     
+    foreach ($u['data'] as $key => $value) {
+      if ($value['type']=='staff' || $value['type']=='admin') {
+
+        echo <<<HTML
+                   <!--  -->
+              <div class="col">
+                <div class="card" style="width: 18rem;">
+                  <img src="assets/img/download.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{$value['username']}</h5>
+                    <p class="card-text">{$value['type']}</p>
+                    <small>Email: {$value['email']}</small>
+                  </div>
+                  <div class="card-body">
+                   
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+        HTML;
+      }
+    }
+    
+    ?>
+
+
+    </div>
   </div>
-</div>
 </figure>

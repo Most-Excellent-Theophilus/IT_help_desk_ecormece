@@ -8,7 +8,7 @@
   </figcaption>
   <main>
 <style>
-  img{
+ .product img{
     width: 300px;
   }
 </style>
@@ -18,6 +18,16 @@
   <?php 
   $n = Products::index();
   foreach ($n['data'] as $key => $value) {
+    if (isset($_SESSION['auth'])) {
+      $button= ' <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+      Add to cart 
+    </a>';
+    } else {
+      $button= ' <a href="?user=guest&path=loggin" class="icon-link gap-1 icon-link-hover stretched-link">
+     loggin First
+    </a>';
+    }
+    
 
 echo '
 <form class="col-md-6">
@@ -26,11 +36,9 @@ echo '
     <h3 class="mb-0">'.$value['pname'].'</h3>
     <div class="mb-1 text-body-secondary">Nov 11</div>
     <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-      Add to cart
-    </a>
+    '. $button.'
   </div>
-  <div class="col-auto d-none d-lg-block">
+  <div class="col-auto d-none product d-lg-block">
     <img src="statics/media/photos/'.$value['uniqueId'].'" alt="">
   </div>
 </div>

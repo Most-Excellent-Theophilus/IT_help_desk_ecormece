@@ -1,6 +1,7 @@
 <main class="form-signin w-100 m-auto container">
   <form action="Actions.php?a=POST&source=Users&method=search&do=loggin" method="post">
-    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+  <img src="assets/img/ictSolution.png" alt="" width="200" style="margin: 10px; border-radius:10px;">
+
     <h1 class="h3 mb-3 fw-normal">Loggin</h1>
 
     <div class="form-floating">

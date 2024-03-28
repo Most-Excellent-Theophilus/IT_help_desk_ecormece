@@ -1,4 +1,3 @@
-<h1 class="container p-5">Home</h1>
 <style>
     .container{
         display: grid;
