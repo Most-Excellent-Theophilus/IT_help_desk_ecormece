@@ -1,5 +1,11 @@
 <body>
-  <!-- ======= Header ======= -->
+<style>  
+/* .notesDia{
+  background: rgba(255, 255, 255,0.9);
+} */
+</style>
+<!-- ======= Header ======= -->
+  
   <header data-bs-theme="dark">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
@@ -23,13 +29,16 @@
           if (isset($_SESSION['auth'])) {
 
             if ($_SESSION['auth']['type'] == 'staff' || $_SESSION['auth']['type'] == 'admin') {
+
               $note = Notifications::count()['count'];
+
               echo <<<HTML
-                <button type="button" class="btn btn-primary">
-           Notifications <span class="badge badge-light"> {$note} </span>
-         </button>
+                <button type="button" class="btn btn-primary" id='openDialogButton{$note}'>
+                Notifications <span class="badge badge-light"> {$note} </span>
+              </button>
 
          HTML;
+        
             }
             echo <<<HTML
              
@@ -46,3 +55,59 @@
     </nav>
   </header>
   <!-- End Header -->
+
+
+
+
+  <?php
+          if (isset($_SESSION['auth'])) {
+
+            if ($_SESSION['auth']['type'] == 'staff' || $_SESSION['auth']['type'] == 'admin') {
+
+              $note = Notifications::count()['count'];
+
+            
+         echo <<<HTML
+                <dialog class='notesDia'  id="myDialog{$note}" style="border:none; width:70%;">
+              HTML;
+             $notLits= Notifications::index();
+              $count = 1 ;
+             foreach ( $notLits['data'] as $key => $value) {
+
+              $date = new DateTime($value['updated_at']);
+              $formattedDate = $date->format('F j, Y, g:i A');
+             $user= Users::show($value['target'])['data']['username'];
+              $retVal = ($value['nature']=='error') ? 'alert-danger' : 'alert-success' ;
+
+              echo <<<HTML
+                            
+                            <div class="alert {$retVal}" role="alert">
+                       <b>{$count} .</b> <em>{$value['nature']}</em>___ {$value['message']} ___<a href="#" class="alert-link">User : $user</a>. on <small>{$formattedDate}</small> 
+                      </div>
+            HTML;
+            $count++;
+             }
+              
+          echo <<<HTML
+                <button style="position: fixed; top:20px;" class="btn btn-danger" id="closeDialogButton{$note}">Close</button>
+              </dialog >
+                    <script>
+
+                  const dialog = document.getElementById('myDialog{$note}');
+                  const openDialogButton = document.getElementById('openDialogButton{$note}');
+                  const closeDialogButton = document.getElementById('closeDialogButton{$note}');
+
+                  openDialogButton.addEventListener('click', () => {
+                    dialog.showModal();
+                  });
+
+                  closeDialogButton.addEventListener('click', () => {
+                    dialog.close();
+                  });
+                  </script>
+            HTML;
+            }
+           
+          }
+
+          ?>
