@@ -21,19 +21,26 @@
 
           <?php
           if (isset($_SESSION['auth'])) {
-            echo <<<HTML
-                 <button type="button" class="btn btn-primary">
-            Notifications <span class="badge badge-light">4</span>
-          </button>
 
-          <button type="button" class="btn btn-secondary" style="margin-left: 10px;">
-            Chats <span class="badge badge-light">4</span>
-          </button>
+            if ($_SESSION['auth']['type'] == 'staff' || $_SESSION['auth']['type'] == 'admin') {
+              $note = Notifications::count()['count'];
+              echo <<<HTML
+                <button type="button" class="btn btn-primary">
+           Notifications <span class="badge badge-light"> {$note} </span>
+         </button>
+
+         HTML;
+            }
+            echo <<<HTML
+             
+          <a href='Actions.php?a=logout' class="btn btn-secondary" style="margin-left: 10px;">
+           logout
+          </a>
           HTML;
           }
-         
+
           ?>
-         
+
         </div>
       </div>
     </nav>

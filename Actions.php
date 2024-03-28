@@ -26,7 +26,7 @@ if (!empty($_GET['a'])) {
 
                             $data = call_user_func_array([$class, $method], $parameters);
                      } else {
-                            $data =    ['status' => 'fail','message' => 'POST Parameters not enough'];
+                            $data =    ['status' => 'fail', 'message' => 'POST Parameters not enough'];
                      }
 
 
@@ -41,8 +41,7 @@ if (!empty($_GET['a'])) {
                             $id = [$_GET['id']];
                             $data =   $class::update($id, [$_POST]);
                      } else {
-                               $data = ['status' => 'fail', 'message' => 'Parameters not enough'];
-
+                            $data = ['status' => 'fail', 'message' => 'Parameters not enough'];
                      }
                      break;
 
@@ -54,17 +53,24 @@ if (!empty($_GET['a'])) {
                             $id = $_GET['id'];
                             $data =  $class::destroy($id);
                      } else {
-                            $data = ['status' => 'fail','message' => 'Parameters not enough'];
+                            $data = ['status' => 'fail', 'message' => 'Parameters not enough'];
                      }
+                     break;
+
+              case 'logout':
+                     session_unset();
+                     session_destroy();
+                     header("Location: index.php?user=guest&path=home");
+                     exit;
                      break;
 
               default:
                      http_response_code(405); // Method Not Allowed
-                     $data =     ['status' => 'fail','message' => 'Method Not Allowed'];
+                     $data =     ['status' => 'fail', 'message' => 'Method Not Allowed'];
                      break;
        }
 } else {
-       $data =   ['status' => 'fail','message' => 'Parameters are not enough, please lod the url'];
+       $data =   ['status' => 'fail', 'message' => 'Parameters are not enough, please lod the url'];
 }
 
 $dir = '';
@@ -74,9 +80,8 @@ switch ($_GET['do']) {
               if (isset($_SESSION['auth'])) {
                      # code...
                      $dir = 'user=' . $_SESSION['auth']['type'] . '&path=users';
-              } else{
+              } else {
                      $dir = 'user=guest&path=loggin';
-
               }
               break;
        case 'loggin':
@@ -94,17 +99,17 @@ switch ($_GET['do']) {
 
 
        default:
-       $dir = 'user=' . $_SESSION['auth']['type'] . '&path='.$_GET['from'];
-              
+              $dir = 'user=' . $_SESSION['auth']['type'] . '&path=' . $_GET['from'];
+
               break;
 }
 
 
-       $_SESSION['hap'] = $_GET['do'];
-       $_SESSION['data'] = $data;
+$_SESSION['hap'] = $_GET['do'];
+$_SESSION['data'] = $data;
 
-       $d =['target'=>$_SESSION['auth']['id'],'nature'=>$data['status'],'message'=>$_GET['do']];
-      $n= Notifications::store($d);
+$d = ['target' => $_SESSION['auth']['id'], 'nature' => $data['status'], 'message' => $_GET['do']];
+$n = Notifications::store($d);
 
-       header("Location: index.php? " . $dir);
-       exit;
+header("Location: index.php? " . $dir);
+exit;
