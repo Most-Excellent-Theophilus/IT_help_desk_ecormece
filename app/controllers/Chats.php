@@ -1,5 +1,5 @@
 <?php
-class Carts 
+class Chats 
 {
      
     public static function index()

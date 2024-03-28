@@ -80,53 +80,58 @@
 
 
 
+<?php
+            if ($_SESSION['auth']['type']=='customer') {
+                echo<<<HTML
+                                <dialog id="myDia" style="width: 70%; height:100%;">
 
-<!-- The dialog content -->
-<dialog id="myDia" style="width: 70%; height:100%;">
 
+                                    <div >
+                                        <h2>Chat</h2>
+                                        <p>name : <b>{$_SESSION['auth']['username']}</b></p>
+                                        <form style="" action="Actions.php?a=POST&source=Chats&method=store&do=Send chart&from={$_GET['path']}" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="by" value='{$_SESSION["auth"]["username"]}' >
+                                        <textarea  id="summernote" name="cont" id="" cols="60" rows="10" placeholder="Start typing ..."><p></p></textarea>
+                                            <script>
+                                                $('#summernote').summernote({
+                                                    placeholder: 'Start typing ...',
+                                                    tabsize: 2,
+                                                    height: 220,
+                                                    toolbar: [
+                                                        ['style', ['style']],
+                                                        ['font', ['bold', 'underline', 'clear']],
+                                                        ['color', ['color']],
+                                                        ['para', ['ul', 'ol', 'paragraph']],
+                                                        ['table', ['table']],
+                                                        ['insert', ['link', 'picture']],
+                                                        // ['insert', ['link', 'picture', 'video']],
+                                                        // ['view', [ 'help']]
+                                                        // ['view', ['fullscreen', 'codeview', 'help']]
+                                                    ]
+                                                });
+                                            </script>
+                                            <br>
+                                            <button id="closeDia" class="btn btn-danger">Close</button>
+                                            <button type="submit" class="btn btn-primary">Send </button>
+                                        </form>
+                                    </div>
+                                </dialog>
 
-    <div >
-        <h2>Chat</h2>
-        <form style="" action="Actions.php?a=POST&source=InquiryLists&method=store&do=create Inquiry Cartegory&from=<?php echo $_GET['path']; ?>" method="post" enctype="multipart/form-data">
-        <textarea  id="summernote" name="cont" id="" cols="60" rows="10" placeholder="Start typing ..."><p>Start typing ...</p></textarea>
-            <script>
-                $('#summernote').summernote({
-                    placeholder: 'Hello stand alone ui',
-                    tabsize: 2,
-                    height: 120,
-                    toolbar: [
-                        ['style', ['style']],
-                        ['font', ['bold', 'underline', 'clear']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['table', ['table']],
-                        ['insert', ['link', 'picture']],
-                        // ['insert', ['link', 'picture', 'video']],
-                        // ['view', [ 'help']]
-                        // ['view', ['fullscreen', 'codeview', 'help']]
-                    ]
-                });
-            </script>
-            <br>
-            <button id="closeDia" class="btn btn-danger">Close</button>
-            <button type="submit" class="btn btn-primary">Send </button>
-        </form>
-    </div>
-</dialog>
+                                <script>
+                                    // Get references to the dialog and its controls
+                                    const dialog = document.getElementById('myDia');
+                                    const openDialogButton = document.getElementById('openDia');
+                                    const closeDialogButton = document.getElementById('closeDia');
 
-<script>
-    // Get references to the dialog and its controls
-    const dialog = document.getElementById('myDia');
-    const openDialogButton = document.getElementById('openDia');
-    const closeDialogButton = document.getElementById('closeDia');
+                                    // Show the dialog when the open dialog button is clicked
+                                    openDialogButton.addEventListener('click', () => {
+                                        dialog.showModal();
+                                    });
 
-    // Show the dialog when the open dialog button is clicked
-    openDialogButton.addEventListener('click', () => {
-        dialog.showModal();
-    });
-
-    // Close the dialog when the close button is clicked
-    closeDialogButton.addEventListener('click', () => {
-        dialog.close();
-    });
-</script>
+                                    // Close the dialog when the close button is clicked
+                                    closeDialogButton.addEventListener('click', () => {
+                                        dialog.close();
+                                    });
+                                </script>
+    HTML;
+} 
