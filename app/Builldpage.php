@@ -39,7 +39,7 @@ class Builldpage
                 if ($this->url_path[1] !== 'loggin' && $this->url_path[1] !== 'createAccount') {
                     $links = Functions::getLinks("public/pages");
 
-                    $links[] = 'loggin';
+                   
                     $this->links = $links;
                     $page = 'header';
                     require $this->dir . $this->pagedir . $this->utilsdir . $page . $this->ext;

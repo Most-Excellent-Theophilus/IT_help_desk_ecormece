@@ -46,6 +46,13 @@
            logout
           </a>
           HTML;
+          } else {
+            echo <<<HTML
+             
+            <a href='?user=guest&path=loggin' class="btn btn-secondary" style="margin-left: 10px;">
+             log in
+            </a>
+            HTML;
           }
 
           ?>
