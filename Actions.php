@@ -46,8 +46,7 @@ if (!empty($_GET['a'])) {
                      break;
 
               case 'DELETE':
-                     if (!empty($_GET['method'] && !empty($_GET['id']))) {
-
+                     if (!empty($_GET['id'])) {
 
                             $class = $_GET['source'];
                             $id = $_GET['id'];

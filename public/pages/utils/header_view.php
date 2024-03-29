@@ -84,7 +84,7 @@
               $date = new DateTime($value['updated_at']);
               $formattedDate = $date->format('F j, Y, g:i A');
              $user= Users::show($value['target'])['data']['username'];
-              $retVal = ($value['nature']=='error') ? 'alert-danger' : 'alert-success' ;
+              $retVal = ($value['nature']!=='success') ? 'alert-danger' : 'alert-success' ;
 
               echo <<<HTML
                             
