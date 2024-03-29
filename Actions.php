@@ -1,6 +1,8 @@
 <?php
 
 require 'app/forActions.php';
+Functions::show($_GET);
+Functions::show($_POST);
 session_start();
 
 
@@ -39,9 +41,9 @@ if (!empty($_GET['a'])) {
 
                             $class = $_GET['source'];
                             $id = [$_GET['id']];
-                            $data =   $class::update($id, [$_POST]);
+                            $data =   $class::update($id, $_POST);
                      } else {
-                            $data = ['status' => 'fail', 'message' => 'Parameters not enough'];
+                            $data = ['status' => 'fail', 'message' => 'what  Parameters not enough'];
                      }
                      break;
 

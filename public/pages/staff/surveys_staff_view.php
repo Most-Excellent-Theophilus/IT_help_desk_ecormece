@@ -21,14 +21,54 @@
         border-radius: 5px;
         
     }
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <div class="container p-2" style="outline: 1px solid;">
     <div>
         <div style="display: flex;">
-            <h2 style="flex-grow: 2; border-bottom:1px solid;">Create Survey</h2> <button id="openDialogButton" class="btn btn-primary">Create</button>
+            <h2 style="flex-grow: 2; border-bottom:1px solid;"> Survey List</h2> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreen">Create</button>
 
         </div>
-    
+        <?php
+        $directory = "Surveymaker/action/surveys";
+
+        // Get the list of files and directories
+        $contents = scandir($directory);
+        
+        // Loop through the array of file names and directory names
+        echo <<<HTML
+            <div class="accordion" id="accordionExample">
+                <hr>
+        HTML;
+        $count = 1;
+        foreach ($contents as $item) {
+            if ($item !=='.' && $item !=='..') {
+
+                $surv = explode('.',$item );
+                echo '   <div class="accordion-item">
+                            <h4 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne'.$count.'" aria-expanded="false" aria-controls="collapseOne'.$count.'">
+                             <b>'.$count.' .</b> '.  $surv[0].'
+                            </button>
+                            </h4>
+                            <div id="collapseOne'.$count.'" class="accordion-collapse collapse" data-bs-parent="#accordionExample'.$count.'" style="">
+                                    <div class="accordion-body">
+                                      '. html_entity_decode(file_get_contents('Surveymaker/action/surveys/'.$item )).'
+                                    </div>
+                            </div>
+                        </div>';
+                $count++;
+            }
+        }
+        echo <<<HTML
+            
+            </div>
+            HTML;
+
+        ?>
     </div>
 
     <div>
@@ -42,38 +82,17 @@
 </div>
 
 
-
-<!-- The dialog content -->
-<dialog id="myDialog">
-<h1>Create Survey</h1>
-
-        <form action="" method="post" enctype="multipart/form-data" style=" display:grid; grid-template-columns: 1fr 2fr;">
-        <div style="display: flex;flex-direction: column   ; padding:10px;">
-            <a class="btn btn-secondary">Question</a><br>
-            <a class="btn btn-secondary">Response Option</a><br><hr>
-        <a class="btn btn-primary">Continue</a>
-
-        </div>
-           <textarea name="form" id="" cols="30" rows="10"  ></textarea>
-           
-        </form>
-        <button id="closeDialogButton" class="btn btn-danger"> Close</button>
-</dialog>
-
-<script>
-    // Get references to the dialog and its controls
-    const dialog = document.getElementById('myDialog');
-    const openDialogButton = document.getElementById('openDialogButton');
-    const closeDialogButton = document.getElementById('closeDialogButton');
-
-    // Show the dialog when the open dialog button is clicked
-    openDialogButton.addEventListener('click', () => {
-        dialog.showModal();
-    });
-
-    // Close the dialog when the close button is clicked
-    closeDialogButton.addEventListener('click', () => {
-        dialog.close();
-    });
-</script>
+<div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+    
+      <div class="modal-body">
+<iframe src="Surveymaker/index.html" frameborder="0"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 

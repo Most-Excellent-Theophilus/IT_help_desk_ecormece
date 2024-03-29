@@ -19,9 +19,9 @@
   $n = Products::index();
   foreach ($n['data'] as $key => $value) {
     if (isset($_SESSION['auth'])) {
-      $button= ' <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+      $button= ' <button type="submit" class="btn btn-primary">
       Add to cart 
-    </a>';
+    </button>';
     } else {
       $button= ' <a href="?user=guest&path=loggin" class="icon-link gap-1 icon-link-hover stretched-link">
      loggin First
@@ -30,9 +30,12 @@
     
 
 echo '
-<form class="col-md-6">
+<form class="col-md-6" method="post" action="Actions.php?a=POST&source=Carts&method=store&do=purchase Product'.$value['pname'].'&from='.$_GET['path'].'">
 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
   <div class="col p-4 d-flex flex-column position-static">
+  <input type="hidden" name="customer_id" value="'.$_SESSION['auth']['id'].'">
+  <input type="hidden" name="items" value="'.$value['id'].'">
+  <input type="hidden" name="checked" value="'.$value['id'].'">
     <h3 class="mb-0">'.$value['pname'].'</h3>
     <div class="mb-1 text-body-secondary">Nov 11</div>
     <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
