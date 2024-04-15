@@ -60,7 +60,41 @@
         <div style="display: flex;">
             <h2 style="flex-grow: 2; border-bottom:1px solid;">Customer Inquiries </h2>
         </div>
-        <p>1</p>
+        <div class="accordion" id="accordionExample">
+
+<hr>
+  <?php  
+  $Inq = Inquiries::index();
+
+  foreach ($Inq['data'] as $key => $value) {
+    // Functions::show($value);
+    $user =Users::show($value['customer_id']);
+    $date = new DateTime( $user['data']['updated_at']);
+                    $formattedDate = $date->format('F j, Y, g:i A');
+    echo '   <div class="accordion-item">
+    <h4 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne'. $value['id'].'" aria-expanded="false" aria-controls="collapseOne'. $value['id'].'">
+      <b>by :</b> '. $user['data']['username'].' ____ '. $value['inquiry'].'
+      <small class="text-body-secondary"> _____ on : '.$formattedDate.'</small>
+
+        </button>
+    </h4>
+    <div id="collapseOne'. $value['id'].'" class="accordion-collapse collapse" data-bs-parent="#accordionExample'. $value['id'].'" style="">
+        <div class="accordion-body">
+        '. $value['cont'].'
+        </div>
+    </div>
+</div>'    ;
+}
+
+
+
+        
+        ?>
+<hr>
+
+
+</div>
     </div>
 
 </div>

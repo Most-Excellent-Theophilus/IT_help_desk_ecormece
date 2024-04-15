@@ -1,8 +1,7 @@
 <?php
 
 require 'app/forActions.php';
-Functions::show($_GET);
-Functions::show($_POST);
+
 session_start();
 
 

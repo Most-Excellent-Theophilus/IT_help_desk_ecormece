@@ -76,7 +76,43 @@
         <div style="display: flex; flex-direction: column   ;">
             <h2 style="flex-grow: 2; border-bottom:1px solid;">Customer Response </h2>
         </div>
-        <p>1</p>
+        <?php
+        $directory = "Surveymaker/action/surveyresponse";
+
+        // Get the list of files and directories
+        $contents = scandir($directory);
+        
+        // Loop through the array of file names and directory names
+        echo <<<HTML
+            <div class="accordion" id="accordionExample">
+                <hr>
+        HTML;
+        $count = 100;
+        foreach ($contents as $item) {
+            if ($item !=='.' && $item !=='..') {
+
+                $surv = explode('.',$item );
+                echo '   <div class="accordion-item">
+                            <h4 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne'.$count.'" aria-expanded="false" aria-controls="collapseOne'.$count.'">
+                             <b>'.$count.' .</b> '.  $surv[0].'
+                            </button>
+                            </h4>
+                            <div id="collapseOne'.$count.'" class="accordion-collapse collapse" data-bs-parent="#accordionExample'.$count.'" style="">
+                                    <div class="accordion-body">
+                                      '. html_entity_decode(file_get_contents('Surveymaker/action/surveyresponse/'.$item )).'
+                                    </div>
+                            </div>
+                        </div>';
+                $count++;
+            }
+        }
+        echo <<<HTML
+            
+            </div>
+            HTML;
+
+        ?>
     </div>
 
 </div>

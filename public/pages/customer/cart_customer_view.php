@@ -84,13 +84,13 @@
     <h1 class="container p-5">Cart</h1>
 
 
-    <div class="row g-5">
+    <div class="row g-5" id="selectedContent">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Your cart</span>
           <!-- <span class="badge bg-primary rounded-pill">3</span> -->
         </h4>
-        <ul class="list-group mb-3">
+        <ul class="list-group mb-3" id="selectedContent">
 
           <?php
           $n = Carts::index();
@@ -178,10 +178,28 @@
 
             <hr class="my-4">
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Get Invoice</button>
+            <button class="w-100 btn btn-primary btn-lg" onclick="printSelectedPart()   ">Get Invoice</button>
         </form>
       </div>
     </div>
   </main>
 
 </div>
+<script>
+
+function printSelectedPart() {
+    // Select the specific part of the page you want to print
+    var selectedContent = document.getElementById('selectedContent'); // Change 'selectedContent' to the id of the element you want to print
+
+    // Create a new window to contain the selected content
+    var printWindow = window.open('', '_blank', 'width=600,height=600');
+
+    // Write the selected content to the new window
+    printWindow.document.write('<html><head><title>Print</title></head><body>');
+    printWindow.document.write(selectedContent.innerHTML);
+    printWindow.document.write('</body></html>');
+
+    // Print the content
+    printWindow.print();
+}
+</script>
